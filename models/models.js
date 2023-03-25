@@ -18,12 +18,12 @@ const TodoSchema = new Schema({
 const PostSchema = new Schema({
   text: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 const CommentSchema = new Schema({
   text: { type: String, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  post: { type: Schema.Types.ObjectId, ref: 'Post', require: true }, 
 });
 
 const User = mongoose.model('User', UserSchema);
