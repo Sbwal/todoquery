@@ -1,6 +1,9 @@
 const express = require('express');
 const { mongooseConnection } = require('./models');
-const userRoutes = require('./routes/user.routes');
+const jwt = require('jsonwebtoken');
+const todoRouter = require('./routes/todo.routes');
+const postRouter = require('./routes/post.routes');
+const userRouter = require('./routes/user.routes');
 
 const app = express();
 
@@ -21,11 +24,29 @@ app.get('/healthcheck', (req, res) => {
     res.send('Working');
 })
 
-app.post('/user', userRoutes.user);
-app.post('/login', userRoutes.login);
+app.post('/user', async (req, res) => {
+    const { name, username, email, password } = req.body;
+    const user = new User({ name, username, email, password });
+    await user.save();
+    res.send('User created successfully');
+});
 
-app.use('todo', userRoutes.authMiddleware, );
-app.use('post', userRoutes.authMiddleware, );
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email, password });
+    if (!user) {
+        return res.status(401).send('Invalid email or password');
+    }
+    const token = jwt.sign({ userId: user._id }, 'secret');
+    res.send({ token });
+});
 
+app.use('/todo', todoRouter);
+app.use('/post', postRouter);
+app.use('/user', userRouter);
+
+app.all('*', (req, res) => {
+    res.status(404).send('Route not found');
+});
 
 module.exports = app;
