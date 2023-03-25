@@ -11,7 +11,7 @@ const UserSchema = new Schema({
 const TodoSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
-  completed: { type: Boolean, default: false },
+  completed: { type: String, enum: ['pending', 'completed'], default: 'pending' },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 

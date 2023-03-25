@@ -5,24 +5,24 @@ const { authMiddleware } = require('../middleware');
 const postRouter = express.Router();
 
 // Post routes
-app.post('/post', authMiddleware, async (req, res) => {
+postRouter.post('/', authMiddleware, async (req, res) => {
     // ...
 });
 
-app.get('/post/:id', authMiddleware, async (req, res) => {
+postRouter.get('/:id', authMiddleware, async (req, res) => {
     // ...
 });
 
-app.get('/posts', authMiddleware, async (req, res) => {
+postRouter.get('/', authMiddleware, async (req, res) => {
     // ...
 });
 
 // Comment routes
-app.post('/post/:id/comment', authMiddleware, async (req, res) => {
+postRouter.post('/:id/comment', authMiddleware, async (req, res) => {
     // ...
 });
 
-app.get('/post/:id/comment', authMiddleware, async (req, res) => {
+postRouter.get('/:id/comment', authMiddleware, async (req, res) => {
     // ...
 });
 

@@ -4,15 +4,15 @@ const { authMiddleware } = require('../middleware');
 
 const userRouter = express.Router();
 
-app.get('/user/:id', authMiddleware, async (req, res) => {
+userRouter.get('/:id', authMiddleware, async (req, res) => {
   // ...
 });
 
-app.post('/user/:id/comment', authMiddleware, async (req, res) => {
+userRouter.post('/:id/comment', authMiddleware, async (req, res) => {
   // ...
 });
 
-app.get('/user/:id/todos', authMiddleware, async (req, res) => {
+userRouter.get('/:id/todos', authMiddleware, async (req, res) => {
   // ...
 });
 
