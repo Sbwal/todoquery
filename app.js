@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models/models');
+const { User } = require('./models/models');
 const todoRouter = require('./routes/todo.routes');
 const { mongooseConnection } = require('./models');
 const postRouter = require('./routes/post.routes');
