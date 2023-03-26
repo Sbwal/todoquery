@@ -4,7 +4,7 @@ const config = require('../config/default');
 mongoose.set("strictQuery", false);
 
 function connect() {
-    const dbURI = 'mongodb://' + config.mongoConfig.host + ':' + config.mongoConfig.mongoPort + '/' + config.mongoConfig.dbName;
+    const dbURI = `mongodb+srv://${config.mongoConfig.userName}:${config.mongoConfig.password}@${config.mongoConfig.host}/?retryWrites=true&w=majority`;
     console.log('Connecting to MongoDB...')
     mongoose.connect(dbURI).then(() => {
         console.log('Connection to MongoDB established')
